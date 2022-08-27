@@ -21,7 +21,7 @@ class Post(models.Model):
         ('3', '#눈'),
         ('4', '#바람'),
     )
-    weather=models.IntegerField(default=0, choices=WEATHER_CHOICES)
+    weather=models.CharField(max_length=5, default=0, choices=WEATHER_CHOICES)
     temp=models.CharField(max_length=5)
     FINEDUST_CHOICES = (
         ('0', '#좋음'),
@@ -30,7 +30,7 @@ class Post(models.Model):
         ('3', '#조금나쁨'),
         ('4', '#나쁨'),
     )
-    finedust=models.IntegerField(default=0, choices=FINEDUST_CHOICES)
+    finedust=models.CharField(max_length = 5, default=0, choices=FINEDUST_CHOICES)
     tmi=models.TextField(null=True, blank=True)
     liked=models.IntegerField(null=True, blank=True)
     scrap=models.IntegerField(null=True, blank=True)
