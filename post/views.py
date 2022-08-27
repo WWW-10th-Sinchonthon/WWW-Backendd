@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post, Scrap
-
+from accounts.models import Users
 def home(request):
     return render(request, 'Main.html')
 
@@ -29,7 +29,7 @@ def create(request):
 
 
 def detail(request, post_id):
-    post_detail = get_object_or_404(Post, pk=post_id)
+    post_detail = get_object_or_404(Post, id=post_id)
     return render(request, 'detail.html', {'post_detail':post_detail})
 
 
@@ -37,5 +37,35 @@ def scrapview(request):
     pass
     
 
-def mypage(request):
-    return render(request, 'mypage.html')
+def mypage(request,user_id):
+    wear_tag = {}
+    weather = []
+    temp = []
+    finedust = []
+    temp = 0
+    post_num = 0
+    user = get_object_or_404(Users, id = user_id)
+    post_detail = Post.objects.filter(user = user)
+    for post in post_detail:
+
+        weather[int(post.weather)] = weather[int(post.weather)]+1
+        finedust[int(post.finedust)] = finedust[int(post.finedust)]+1
+        temp = temp + int(post.temp)
+        post_num = post_num + 1
+        try :
+            wear_tag[weather.wear_tag1] = int(wear_tag[weather.wear_tag1]) +1
+        except :
+            wear_tag[weather.wear_tag1] = 1
+
+    # for post in post_detail :
+    #     post
+    sorted_dict = sorted(wear_tag.items(), key = lambda item: item[1])
+    my_wear = []
+    my_wear.append()
+    weather = weather.sort(reverse=True)[0]
+    finedust = finedust.sort(reverse=True)[0]
+    temp_avg = temp/post_num
+    my_info = {'weather' : weather, 'finedust' : finedust, 'temp_avg' : temp_avg }
+
+
+    return render(request,'mypage.html', {'post_detail' : post_detail, 'user_detial' : user, 'my_info' : my_info})

@@ -1,2 +1,31 @@
 
-{{post_detail.user}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>detail</title>
+</head>
+<body>
+    <a href="{% url 'create' %}">create</a>
+    <a href="{% url 'mypage' %}">{{post_detail.user.nickname}}</a>
+    {{post_detail.user.nickname}}
+    {{post_detail.image}}
+    {{post_detail.wear_tag1}}
+    {{post_detail.wear_tag2}}
+    {{post_detail.wear_tag3}}
+    {{post_detail.today_tag1}}
+    {{post_detail.today_tag2}}
+    {{post_detail.today_tag3}}
+    {{post_detail.liked}}
+    {{post_detail.scrap}}
+    {{post_detail.weather}}
+    {{post_detail.weather_desc}}
+    {{post_detail.temp}}
+    {{post_detail.temp_desc}}
+    {{post_detail.finedust}}
+    {{post_detail.finedust_desc}}
+    {{post_detail.tmi}}
+</body>
+</html>
