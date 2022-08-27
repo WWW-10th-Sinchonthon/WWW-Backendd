@@ -38,3 +38,6 @@ def detail(request, post_id):
 def scrapview(request):
     pass
     
+
+def mypage(request):
+    return render(request, 'mypage.html')
