@@ -10,6 +10,7 @@
 <body>
     <a href="{% url 'create' %}">create</a>
     <a href="{% url 'mypage' post_detail.id %}">{{post_detail.user.nickname}}</a>
+    {{post_detail.user.user_image}}
     {{post_detail.user.nickname}}
     {{post_detail.image}}
     {{post_detail.wear_tag1}}
