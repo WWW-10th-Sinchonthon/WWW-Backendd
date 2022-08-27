@@ -41,35 +41,104 @@ def create(request):
 
 def detail(request, post_id):
     post_detail = get_object_or_404(Post, id=post_id)
-    return render(request, 'detail.html', {'post_detail':post_detail})
+    weather_index = 0
+    weather_max = 0
+    finedust_index = 0
+    finedust_max = 0
+    if weather_index == 0:
+        weather_status =  '#맑음'
+    elif weather_index == 1:
+        weather_status =  '#흐림'
+    elif weather_index == 2:
+        weather_status =  '#비'
+    elif weather_index == 3:
+        weather_status =  '#눈'
+    else : 
+        weather_status =  '#바람'
+        
+    if finedust_index == 0:
+        finedust_status =  '#좋음'
+    elif finedust_index == 1:
+        finedust_status =  '#조금좋음'
+    elif finedust_index == 2:
+        finedust_status =  '#보통'
+    elif finedust_index == 3:
+        finedust_status =  '#조금나쁨'
+    else : 
+        finedust_status =  '#나쁨'
+    return render(request, 'detail.html', {'post_detail':post_detail, 'weather' : weather_status, 'finedust': finedust_status})
 
 def mypage(request,user_id):
-    wear_tag = {}
-    weather = []
-    temp = []
-    finedust = []
+    #wear_tag = {}
+    weather_avg = [0,0,0,0,0]
+    finedust_avg = [0,0,0,0,0]
+
     temp = 0
     post_num = 0
     user = get_object_or_404(Users, id = user_id)
     post_detail = Post.objects.filter(user = user)
     for post in post_detail:
 
-        weather[int(post.weather)] = weather[int(post.weather)]+1
-        finedust[int(post.finedust)] = finedust[int(post.finedust)]+1
+        weather_avg[int(post.weather)] = weather_avg[int(post.weather)]+1
+        finedust_avg[int(post.finedust)] = finedust_avg[int(post.finedust)]+1
         temp = temp + int(post.temp)
         post_num = post_num + 1
-        try :
-            wear_tag[weather.wear_tag1] = int(wear_tag[weather.wear_tag1]) +1
-        except :
-            wear_tag[weather.wear_tag1] = 1
+        # try :
+        #     wear_tag[str(weather.wear_tag1)] = int(wear_tag[weather.wear_tag1]) +1
+        # except :
+        #     wear_tag[str(weather.wear_tag1)] = 1
 
     # for post in post_detail :
     #     post
-    sorted_dict = sorted(wear_tag.items(), key = lambda item: item[1])
-    my_wear = []
-    my_wear.append()
-    weather = weather.sort(reverse=True)[0]
-    finedust = finedust.sort(reverse=True)[0]
+    # #sorted_dict = sorted(wear_tag.items(), key = lambda item: item[1])
+    # wear = list(sorted_dict.keys())
+    # my_wear = []
+    # my_wear.append(wear[0])
+    # my_wear.append(wear[1])
+    # my_wear.append(wear[2])
+    weather_index = 0
+    weather_max = 0
+    finedust_index = 0
+    finedust_max = 0
+    for i in range(5):
+        if weather_avg[i] > weather_max:
+            weather_max = weather_avg[i]
+            weather_index = i
+        if finedust_avg[i] > finedust_max:
+            finedust_max = finedust_avg[i]
+            finedust_index = i
+
+    if weather_index == 0:
+        weather_status =  '#맑음'
+    elif weather_index == 1:
+        weather_status =  '#흐림'
+    elif weather_index == 2:
+        weather_status =  '#비'
+    elif weather_index == 3:
+        weather_status =  '#눈'
+    else : 
+        weather_status =  '#바람'
+        
+    if finedust_index == 0:
+        finedust_status =  '#좋음'
+    elif finedust_index == 1:
+        finedust_status =  '#조금좋음'
+    elif finedust_index == 2:
+        finedust_status =  '#보통'
+    elif finedust_index == 3:
+        finedust_status =  '#조금나쁨'
+    else : 
+        finedust_status =  '#나쁨'
+
+        ('0', '#좋음'),
+        ('1', '#조금좋음'),
+        ('2', '#보통'),
+        ('3', '#조금나쁨'),
+        ('4', '#나쁨'),
+
+ 
     temp_avg = temp/post_num
-    my_info = {'weather' : weather, 'finedust' : finedust, 'temp_avg' : temp_avg }
-    return render(request,'mypage.html', {'post_detail' : post_detail, 'user_detial' : user, 'my_info' : my_info})
+    my_info = {'weather' : weather_status, 'finedust' : finedust_status, 'temp_avg' : temp_avg  }
+
+
+    return render(request,'mypage.html', {'post_detail' : post_detail, 'user_detail' : user, 'weather' : weather_status, 'finedust' : finedust_status, 'temp_avg' : temp_avg })

@@ -1,4 +1,4 @@
-
+{% load static %}
 <head>
     <title>www.</title>
     <meta charset="UTF-8" />
@@ -9,50 +9,54 @@
 <body>
     <div class="view">
         <div class="topBar">
-            <p id="title">www.</p>
+            <span class="logo"><a href="{% url 'Main' %}">www.</a></span>
             <div class="right">
-                <p id="write" onclick="location.href='../Html/CreatePage.html'">
+                <p id="write" onclick="location.href={% url 'create' %}">
                     글쓰기
                 </p>
-                <p id="name">닉네임</p>
+                <a id="name" href="{% url 'mypage' user.id %}">{{user.nickname}}</a>
             </div>
         </div>
         <button class="backBtn">
             <img src="{% static 'img/backbtn.svg' %}" alt="backbtn" />
         </button>
         <div class="profileBox">
+            {% if post_detail.user.user_image%}
+            <img class="userProfileImg" src="{{post_detail.user.user_image.url}}" alt="profileicon" />
+            {% else %}
             <img src="{% static 'img/profileicon.svg' %}" alt="profileicon" />
-            <p id="profileName">닉네임</p>
+            {%endif%}
+            <p id="profileName">{{post_detail.user.nickname}}</p>
         </div>
-        <div class="detailImg"><img src="{% static 'img/detailshot.svg' %}" alt="" /></div>
+        {%if post_detail.image %}
+        <div class="detailImg"><img src="{{post_detail.image.url}}" alt="" /></div>
+        {%endif%}
         <div class="tagBox">
-            <p id="commentTag">#사복</p>
-            <p id="commentTag">#한강</p>
-            <p id="commentTag">#개강전</p>
-            <p id="clothesTypeTag">#얇은긴팔</p>
-            <p id="clothesTypeTag">#A라인청치마</p>
+            <p id="commentTag">#{{post_detail.today_tag1}}</p>
+            <p id="commentTag">#{{post_detail.today_tag2}}</p>
+            <p id="commentTag">#{{post_detail.today_tag3}}</p>
+            <p id="clothesTypeTag">#{{post_detail.wear_tag1}}</p>
+            <p id="clothesTypeTag">#{{post_detail.wear_tag2}}</p>
+            <p id="clothesTypeTag">#{{post_detail.wear_tag3}}</p>
         </div>
         <div class="nowWeatherBox">
             <div class="Title">현재 날씨 ⛅</div>
             <div class="contentBox">
-                <p class="ContentTitle">오늘의 날씨: 맑음 🌞</p>
+                <p class="ContentTitle">오늘의 날씨: {{weather}} 🌞</p>
                 <p class="ContentExplain">
-                    오랜만에 볕 따스하고, 구름 많습니다~! 가을이 오려나봐요! 아직 밤마다
-                    비가 살짝 오니 우산 챙겨가세요~!
+                    {{post_detail.weather_desc}}
                 </p>
-                <p class="ContentTitle">오늘의 기온 : 약 23도 🌡</p>
+                <p class="ContentTitle">오늘의 기온 : 약 {{post_detail.temp}}도 🌡</p>
                 <p class="ContentExplain">
-                    처서가 지난 다음날이라 그런지 여름 날씨에서 가을 날씨로 이동하는
-                    듯한 계절이에요. 아직 여름 볕이 남아 있으니 썬크림은 필수지만,
-                    간간히 바람이 불어와서 추위 많이 타시는 분들은 얇은 겉옷 필수 입니당
+                    {{post_detail.temp_desc}}
                 </p>
-                <p class="ContentTitle">초미세먼지 : 좋음 😁</p>
+                <p class="ContentTitle">초미세먼지 : {{finedust}} 😁</p>
                 <p class="ContentExplain">
-                    코로나만 아니었으면 마스크 집어 던지고 싶은 날~!
+                    {{post_detail.finedust_desc}}
                 </p>
             </div>
             <button class="releteBtn" onclick="releteIncrease()">
-                날씨 공감 👍
+                날씨 공감 👍({{post_detail.liked}})
             </button>
         </div>
         <div class="tmiBox">
@@ -60,13 +64,11 @@
             <div class="contentBox2">
                 <div class="ContentTitle">오늘의 기분 : 좋음 😊</div>
                 <div class="ContentExplain">
-                    오늘은 개강전 친구랑 ~~~ 그냥 몇줄 tmi 남기는 곳! 기록장!느낌 오늘은
-                    개강전 친구랑 ~~~ 그냥 몇줄 tmi 남기는 곳! 기록장!느낌 오늘은 개강전
-                    친구랑 ~~~ 그냥 몇줄 tmi 남기는 곳! 기록장!느낌
+                    {{post_detail.tmi}}
                 </div>
             </div>
             <button class="scrapBtn" onclick="scrapIncrease()">
-                스크랩 하기 🛒
+                스크랩 하기 🛒({{post_detail.scrap}})
             </button>
         </div>
     </div>
