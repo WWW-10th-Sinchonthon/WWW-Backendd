@@ -13,6 +13,6 @@ urlpatterns = [
     path('create/', create, name='create'),
     path('detail/<str:post_id>/', detail, name='detail'),
     path('accounts/', include('accounts.urls')),
-    path('mypage/<str:user_id>', mypage, name="mypage"),
+    path('mypage/<str:user_id>/', mypage, name="mypage"),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

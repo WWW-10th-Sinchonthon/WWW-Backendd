@@ -1,31 +1,93 @@
-
-<!DOCTYPE html>
-<html lang="en">
+{% load static %}
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>detail</title>
+    <title>WWW.</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="{% static 'css/Detail.css' %}" rel="stylesheet" />
 </head>
+
 <body>
-    <a href="{% url 'create' %}">create</a>
-    <a href="{% url 'mypage' post_detail.id %}">{{post_detail.user.nickname}}</a>
-    {{post_detail.user.nickname}}
-    {{post_detail.image}}
-    {{post_detail.wear_tag1}}
-    {{post_detail.wear_tag2}}
-    {{post_detail.wear_tag3}}
-    {{post_detail.today_tag1}}
-    {{post_detail.today_tag2}}
-    {{post_detail.today_tag3}}
-    {{post_detail.liked}}
-    {{post_detail.scrap}}
-    {{post_detail.weather}}
-    {{post_detail.weather_desc}}
-    {{post_detail.temp}}
-    {{post_detail.temp_desc}}
-    {{post_detail.finedust}}
-    {{post_detail.finedust_desc}}
-    {{post_detail.tmi}}
+    <div class="view">
+        <div class="topBar">
+            <p id="title">WWW.</p>
+            <div class="right">
+                <p id="write" onclick="location.href={% url 'create' %}">
+                    글쓰기
+                </p>
+                {% if user.is_authenticated%}
+                <a id="name" href="{% url 'mypage'  user_id=user.id %}">{{user.nickname}}</a>
+                {%endif%}
+            </div>
+        </div>
+        <button class="backBtn">
+            <img src="{% static 'img/backbtn.svg' %}" alt="backbtn" />
+        </button>
+        <div class="profileBox">
+            {% if post_detail.user.user_image%}
+            <img class="userProfileImg" src="{{post_detail.user.user_image.url}}" alt="profileicon" />
+            {% else %}
+            <img src="{% static 'img/profileicon.svg' %}" alt="profileicon" />
+            {%endif%}
+            <p id="profileName">{{post_detail.user.nickname}}</p>
+        </div>
+        <div class="detailImg"><img src="{{post_detail.image.url}}" alt="" /></div>
+        <div class="tagBox">
+            <p id="commentTag">#{{post_detail.today_tag1}}</p>
+            <p id="commentTag">#{{post_detail.today_tag2}}</p>
+            <p id="commentTag">#{{post_detail.today_tag3}}</p>
+            <p id="clothesTypeTag">#{{post_detail.wear_tag1}}</p>
+            <p id="clothesTypeTag">#{{post_detail.wear_tag2}}</p>
+            <p id="clothesTypeTag">#{{post_detail.wear_tag3}}</p>
+        </div>
+        <div class="nowWeatherBox">
+            <div class="Title">현재 날씨 ⛅</div>
+            <div class="contentBox">
+                <p class="ContentTitle">오늘의 날씨: {{weather}} 🌞</p>
+                <p class="ContentExplain">
+                    {{post_detail.weather_desc}}
+                </p>
+                <p class="ContentTitle">오늘의 기온 : 약 {{post_detail.temp}}도 🌡</p>
+                <p class="ContentExplain">
+                    {{post_detail.temp_desc}}
+                </p>
+                <p class="ContentTitle">초미세먼지 : {{finedust}} 😁</p>
+                <p class="ContentExplain">
+                    {{post_detail.finedust_desc}}
+                </p>
+            </div>
+            <button class="releteBtn" onclick="releteIncrease()">
+                날씨 공감 👍({{post_detail.liked}})
+            </button>
+        </div>
+        <div class="tmiBox">
+            <div class="Title">오늘의 tmi🍀</div>
+            <div class="contentBox2">
+                <div class="ContentTitle">오늘의 기분 : {{post_detail.feel}} 😊</div>
+                <div class="ContentExplain">
+                    {{post_detail.tmi}}
+                </div>
+            </div>
+            <button class="scrapBtn" onclick="scrapIncrease()">
+                스크랩 하기 🛒({{post_detail.scrap}})
+            </button>
+        </div>
+    </div>
 </body>
+
 </html>
+
+<script>
+    var releteCount = 0;
+    function releteIncrease() {
+        releteCount = releteCount + 1;
+        document.querySelector('.releteBtn').innerText =
+            '날씨 공감 👍' + ' ' + '(' + releteCount + ')';
+    }
+
+    var scrapCount = 0;
+    function scrapIncrease() {
+        scrapCount = scrapCount + 1;
+        document.querySelector('.scrapBtn').innerText =
+            '스크랩 하기 🛒' + ' ' + '(' + scrapCount + ')';
+    }
+</script>

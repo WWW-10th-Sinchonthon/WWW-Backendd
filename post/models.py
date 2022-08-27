@@ -35,6 +35,7 @@ class Post(models.Model):
     today_tag1=models.CharField(max_length=10)
     today_tag2=models.CharField(max_length=10, null=True, blank=True)
     today_tag3=models.CharField(max_length=10, null=True, blank=True)
+    feel = models.CharField(max_length=10, null=True, blank=True,default = '')
 
     def __str__(self):
         return str(self.id)

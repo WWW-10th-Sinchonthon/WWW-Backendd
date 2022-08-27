@@ -23,9 +23,11 @@ body {
 }
 
 header {
+	
 	background-color: #cfedf3;
 	height: 206px;
 	position: relative;
+	overflow : hidden;
 }
 
 header img {
@@ -237,4 +239,14 @@ main .imgContainer {
 	height: 109px;
 	margin: 0;
 	object-fit: cover;
+}
+header .headContainer {
+	display: flex;
+	justify-content: space-between;
+	padding: 0 18px;
+	padding-top: 22px;
+}
+
+.headContainer span {
+	width: auto;
 }
