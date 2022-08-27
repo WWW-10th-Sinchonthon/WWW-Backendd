@@ -21,6 +21,7 @@ def logout(request):
     auth.logout(request)
     return redirect('Main')
 
+
 def signup(request):
     if request.method == "POST":
         if request.POST['password'] == request.POST['repeat']:
