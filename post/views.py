@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post, Scrap
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'Main.html')
 
 def create(request):
     return render(request, 'create.html')
