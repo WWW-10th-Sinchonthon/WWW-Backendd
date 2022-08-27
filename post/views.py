@@ -40,10 +40,12 @@ def Main(request):
     enddate = startdate + timedelta(days=1)
 
     post = Post.objects.filter(created_at__range=[startdate, enddate])
+
     mypost = post.order_by('-liked')[0]
     print(mypost.weather)
 
     return render(request, 'Main.html', {"mypost":mypost})
+
     
 
 def mypage(request,user_id):
