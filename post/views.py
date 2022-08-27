@@ -41,15 +41,11 @@ def Main(request):
 
     post = Post.objects.filter(created_at__range=[startdate, enddate])
 
-    post.order_by('-liked')[0]
+    mypost = post.order_by('-liked')[0]
+    print(mypost.weather)
 
+    return render(request, 'Main.html', {"mypost":mypost})
 
-    print(str(post.liked))
-    # for posts in Post.objects.filter(created_at__range=[startdate, enddate]):
-    #     temp = posts
-    #     print(str(posts.liked))
-
-    return render(request, 'Main.html')
     
 
 def mypage(request,user_id):
