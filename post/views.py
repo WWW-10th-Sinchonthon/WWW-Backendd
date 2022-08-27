@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post, Scrap
 from accounts.models import Users
+from datetime import timedelta,date
+
 def home(request):
     return render(request, 'Main.html')
 
@@ -33,8 +35,21 @@ def detail(request, post_id):
     return render(request, 'detail.html', {'post_detail':post_detail})
 
 
-def scrapview(request):
-    pass
+def Main(request):
+    startdate = date.today()
+    enddate = startdate + timedelta(days=1)
+
+    post = Post.objects.filter(created_at__range=[startdate, enddate])
+
+    post.order_by('-liked')[0]
+
+
+    print(str(post.liked))
+    # for posts in Post.objects.filter(created_at__range=[startdate, enddate]):
+    #     temp = posts
+    #     print(str(posts.liked))
+
+    return render(request, 'Main.html')
     
 
 def mypage(request,user_id):
