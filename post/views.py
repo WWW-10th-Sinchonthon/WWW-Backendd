@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post, Scrap
 from accounts.models import Users
-from datetime import timedelta,date
+from datetime import datetime, timedelta,date
+import datetime
 
 def home(request):
     return render(request, 'Main.html')
@@ -42,9 +43,12 @@ def Main(request):
     post = Post.objects.filter(created_at__range=[startdate, enddate])
 
     mypost = post.order_by('-liked')[0]
-    print(mypost.weather)
+    now = datetime.datetime.now()
+    current_time = now.strftime("%H:%M")
+    hour = int(now.strftime("%H"))
 
-    return render(request, 'Main.html', {"mypost":mypost})
+
+    return render(request, 'Main.html', {"mypost":mypost, 'now':current_time, 'hour':hour})
 
     
 
