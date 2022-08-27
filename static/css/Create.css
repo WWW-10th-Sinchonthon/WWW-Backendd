@@ -108,6 +108,21 @@ body {
 	margin-bottom: 3px;
 }
 
+.btnBundle__container {
+	display: flex;
+}
+
+.btnBundle__container * {
+	margin-left: 3px;
+}
+
+.btnBundle__hashTag {
+	border: 2px solid #cfedf3;
+	border-radius: 10px;
+	font-size: 10px;
+	padding: 2px 4px;
+}
+
 .tagBtn1 {
 	width: 43px;
 	height: 19px;
