@@ -48,5 +48,5 @@ def edit(request):
         user.introduction = request.POST['introduction']
         user.save()
 
-        return redirect('home')
+        return redirect('Main')
     return render(request, 'edit.html')

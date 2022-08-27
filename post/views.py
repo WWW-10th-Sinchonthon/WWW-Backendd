@@ -49,15 +49,37 @@ def mypage(request,user_id):
     #wear_tag = {}
     weather_avg = [0,0,0,0,0]
     finedust_avg = [0,0,0,0,0]
-
+    
     temp = 0
     post_num = 0
     user = get_object_or_404(Users, id = user_id)
     post_detail = Post.objects.filter(user = user)
     for post in post_detail:
+        if post.weather == '맑음':
+            weather_num = 0
+        elif post.weather == '흐림':
+            weather_num = 1
+        elif post.weather == '비':
+            weather_num = 2
+        elif post.weather == '눈':
+            weather_num = 3
+        else :
+            weather_num = 4
 
-        weather_avg[int(post.weather)] = weather_avg[int(post.weather)]+1
-        finedust_avg[int(post.finedust)] = finedust_avg[int(post.finedust)]+1
+
+        if post.finedust == '좋음':
+            finedust_num = 0
+        elif post.finedust == '조금좋음':
+            finedust_num = 1
+        elif post.finedust == '보통':
+            finedust_num = 2
+        elif post.finedust == '조금나쁨':
+            finedust_num = 3
+        else :
+            finedust_num = 4
+            
+        weather_avg[weather_num] = weather_avg[finedust_num]+1
+        finedust_avg[finedust_num] = finedust_avg[finedust_num]+1
         temp = temp + int(post.temp)
         post_num = post_num + 1
         # try :
@@ -96,6 +118,7 @@ def mypage(request,user_id):
     else : 
         weather_status =  '#바람'
         
+        
     if finedust_index == 0:
         finedust_status =  '#좋음'
     elif finedust_index == 1:
@@ -106,6 +129,8 @@ def mypage(request,user_id):
         finedust_status =  '#조금나쁨'
     else : 
         finedust_status =  '#나쁨'
+
+
  
     temp_avg = temp/post_num
 

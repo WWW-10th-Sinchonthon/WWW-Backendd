@@ -20,6 +20,7 @@
         <div class = "headContainer">
             <span class="logo">www</span>
             <a href="{% url 'create' %}"><span>글쓰기</span></a>
+            <span class="logo"><a href="{% url 'edit' %}">edit</a></span>
 
         </div>
         <div class="profile">
@@ -50,7 +51,7 @@
             </div>
             <div class="imgContainer">
                 {% for post in post_detail%}
-                <img src="{{post.image.url}}" />
+                    <img src="{{post.image.url}}" />
                 {%endfor%}
             </div>
             <div style="width:390px; height:80px"></div>
