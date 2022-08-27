@@ -37,3 +37,4 @@ def detail(request, post_id):
 
 def scrapview(request):
     pass
+    
