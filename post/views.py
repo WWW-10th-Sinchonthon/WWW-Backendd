@@ -1,4 +1,3 @@
-#views
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post, Scrap
 from accounts.models import Users
@@ -6,12 +5,11 @@ def home(request):
     return render(request, 'Main.html')
 
 def create(request):
-    return render(request, 'create.html')
-
-def createform(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
+        return render(request, 'create.html')
+    else:
         post = Post()
-        post.image = request.POST['image']
+        post.image = request.POST.get('image',False)
         post.weather = request.POST['weather']
         post.weather_desc = request.POST['weather_desc']
         post.temp = request.POST['temp']
