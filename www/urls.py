@@ -9,11 +9,10 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home, name='home'),
+    path('', Main, name='Main'),
     path('create/', create, name='create'),
     path('detail/<str:post_id>/', detail, name='detail'),
     path('accounts/', include('accounts.urls')),
     path('mypage/<str:user_id>', mypage, name="mypage"),
-    path('Main/', Main, name="Main")
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

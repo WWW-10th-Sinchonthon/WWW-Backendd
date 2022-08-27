@@ -4,8 +4,15 @@ from accounts.models import Users
 from datetime import datetime, timedelta,date
 import datetime
 
-def home(request):
-    return render(request, 'Main.html')
+def Main(request):
+    startdate = date.today()
+    enddate = startdate + timedelta(days=1)
+    post = Post.objects.filter(created_at__range=[startdate, enddate])
+    mypost = post.order_by('-liked')[0]
+    now = datetime.datetime.now()
+    current_time = now.strftime("%H:%M")
+    hour = int(now.strftime("%H"))
+    return render(request, 'Main.html', {"mypost":mypost, 'now':current_time, 'hour':hour})
 
 def create(request):
     if request.method == 'GET':
@@ -34,23 +41,6 @@ def create(request):
 def detail(request, post_id):
     post_detail = get_object_or_404(Post, id=post_id)
     return render(request, 'detail.html', {'post_detail':post_detail})
-
-
-def Main(request):
-    startdate = date.today()
-    enddate = startdate + timedelta(days=1)
-
-    post = Post.objects.filter(created_at__range=[startdate, enddate])
-
-    mypost = post.order_by('-liked')[0]
-    now = datetime.datetime.now()
-    current_time = now.strftime("%H:%M")
-    hour = int(now.strftime("%H"))
-
-
-    return render(request, 'Main.html', {"mypost":mypost, 'now':current_time, 'hour':hour})
-
-    
 
 def mypage(request,user_id):
     wear_tag = {}
@@ -81,6 +71,4 @@ def mypage(request,user_id):
     finedust = finedust.sort(reverse=True)[0]
     temp_avg = temp/post_num
     my_info = {'weather' : weather, 'finedust' : finedust, 'temp_avg' : temp_avg }
-
-
     return render(request,'mypage.html', {'post_detail' : post_detail, 'user_detial' : user, 'my_info' : my_info})
