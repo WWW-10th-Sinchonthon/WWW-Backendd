@@ -9,7 +9,7 @@ def create(request):
         return render(request, 'create.html')
     else:
         post = Post()
-        post.image = request.POST['image']
+        post.image = request.POST.get('image',False)
         post.weather = request.POST['weather']
         post.weather_desc = request.POST['weather_desc']
         post.temp = request.POST['temp']

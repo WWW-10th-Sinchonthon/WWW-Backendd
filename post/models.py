@@ -37,7 +37,7 @@ class Post(models.Model):
     today_tag3=models.CharField(max_length=10, null=True, blank=True)
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
 class Scrap(models.Model):
     user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='scrap_user')
