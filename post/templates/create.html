@@ -37,39 +37,51 @@
                     <div class="subTitle">
                         <p id="index">오늘의 날씨:</p>
                         <div class="btnBundle">
-                            <button class="tagBtn1">#맑음</button>
-                            <button class="tagBtn1">#흐림</button>
-                            <button class="tagBtn1">#비</button>
-                            <button class="tagBtn1">#눈</button>
-                            <button class="tagBtn1">#바람</button>
+                            <input id="clear_input" type="hidden" name="weather" value="clear">
+                            <div id="clear_btn" class="tagBtn1"
+                                onclick='document.querySelector("#clear_input").checked =true'>#맑음</div>
+                            <input id="cloudy_input" type="hidden" name="weather" value="cloudy">
+                            <div id="cloudy_btn" class="tagBtn1"
+                                onclick='document.querySelector("#cloudy_input").checked =true'>#흐림</div>
+
+                            <button type="radio" name="weather" value="rainy" class="tagBtn1">#비</button>
+                            <button type="radio" name="weather" value="snowy" class="tagBtn1">#눈</button>
+                            <button type="radio" name="weather" value="windy" class="tagBtn1">#바람</button>
+
+
                         </div>
                     </div>
-                    <textarea id="weather" type="text"
+                    <textarea id="weather" type="text" name="weather_desc"
                         placeholder="오늘의 날씨를 서술해주세요. 자세히 서술해 줄수록 도움 받는 사람들이 많아요 :-)"></textarea>
                 </div>
                 <div class="subTitle">
                     <p id="index">오늘의 기온:</p>
-                    <textarea id="temp1" type="textar" placeholder="정확한 기온 숫자만 적어주세요 ~ !"></textarea>
+                    <textarea id="temp1" type="textar" name="temp" placeholder="정확한 기온 숫자만 적어주세요 ~ !"></textarea>
                 </div>
-                <textarea type="text" id="temp2"
+                <textarea type="text" id="temp2" name="temp_desc"
                     placeholder="오늘의 기온을 서술해주세요. 자세히 서술해 줄수록 도움 받는 사람들이 많아요 :-)"></textarea>
                 <div class="subTitle">
                     <p id="index">초미세먼지 :</p>
                     <div class="btnBundle">
-                        <button class="tagBtn2">#좋음</button>
-                        <button class="tagBtn2">#조금좋음</button>
-                        <button class="tagBtn2">#보통</button>
-                        <button class="tagBtn2">#조금나쁨</button>
-                        <button class="tagBtn2">#나쁨</button>
+                        <input id="best_input" type="hidden" name="finedust" value="best">
+                        <div id="best_btn" class="tagBtn2" onclick='document.querySelector("#best_input").checked =true'
+                            style="
+                            width: 50px;
+                        ">#좋음</div>
+                        <button type="radio" name="finedust" value="good" class="tagBtn2">#조금좋음</button>
+                        <button type="radio" name="finedust" value="average" class="tagBtn2">#보통</button>
+                        <button type="radio" name="finedust" value="bad" class="tagBtn2">#조금나쁨</button>
+                        <button type="radio" name="finedust" value="worst" class="tagBtn2">#나쁨</button>
                     </div>
                 </div>
-                <textarea type="text" id="microDust"
+                <textarea type="text" id="microDust" name="finedust_desc"
                     placeholder="오늘의 초미세먼지 농도에 대해 서술해주세요. 자세히 서술해 줄수록 도움 받는 사람들이 많아요 :-)"></textarea>
                 <div class="write">
                     <div class="Title">글쓰기 🖋</div>
                     <div class="subTitle1">
                         <p id="index">오늘의 tmi :</p>
-                        <textarea type="text" id="tmi" placeholder="오늘의 날씨에 따른 기록을 해보세요. 짧아도 좋아요."></textarea>
+                        <textarea type="text" id="tmi" name="tmi"
+                            placeholder="오늘의 날씨에 따른 기록을 해보세요. 짧아도 좋아요."></textarea>
                     </div>
                 </div>
                 <div class="tag">
@@ -77,22 +89,27 @@
                     <p id="ps">오늘 입은 옷 들을 기록을 해보세요.</p>
                     <div class="subTitle">
                         <p id="index">옷 태그:</p>
-                        <textarea type="text" class="clothesTag" id="bar1" placeholder="ex) 얇은 슬랙스"></textarea>
+                        <textarea type="text" name="wear_tag1" class="clothesTag" id="bar1"
+                            placeholder="ex) 얇은 슬랙스"></textarea>
                     </div>
                     <div class="left1">
-                        <textarea type="text" class="clothesTag"></textarea>
-                        <textarea type="text" class="clothesTag"></textarea>
+                        <textarea type="text" name="wear_tag2" class="clothesTag"></textarea>
+                        <textarea type="text" name="wear_tag3" class="clothesTag"></textarea>
                     </div>
                     <p id="ps">오늘을 태그 형태로 기록을 해보세요.</p>
                     <div class="subTitle">
                         <p id="index">기록 태그 :</p>
-                        <textarea type="text" class="archiveTag" id="bar2" placeholder="ex) 한강"></textarea>
+                        <textarea type="text" name="today_tag1" class="archiveTag" id="bar2"
+                            placeholder="ex) 한강"></textarea>
                     </div>
                     <div class="left2">
-                        <textarea type="text" class="archiveTag"></textarea>
-                        <textarea type="text" class="archiveTag"></textarea>
+                        <textarea type="text" name="today_tag2" class="archiveTag"></textarea>
+                        <textarea type="text" name="today_tag3" class="archiveTag"></textarea>
                     </div>
                 </div>
+                <!-- <input type="submit" value="post"> -->
+                <input type="submit" value="post">
+
             </form>
         </div>
     </div>
@@ -101,6 +118,24 @@
 </html>
 
 <script>
+
+    // const good_btn = document.querySelector("#good_btn");
+    // const good_input = document.querySelector("#good_input");
+    // good_btn.addEventListener("click", () => { good_input.checked = true; })
+    // 해쉬태그 가져오기
+
+    let selectedHashTag;
+    const getHashTagValue = (e) => {
+        selectedHashTag = e.target.innerText;
+    }
+
+    const hashTags = [...document.getElementsByClassName("btnBundle__hashTag")]
+    hashTags.forEach((hashtag) => {
+        hashtag.addEventListener("click", getHashTagValue)
+    })
+
+
+
     // 날씨 버튼 선택
     var tagBtn1 = document.getElementsByClassName('tagBtn1');
     var tagBtn2 = document.getElementsByClassName('tagBtn2');
