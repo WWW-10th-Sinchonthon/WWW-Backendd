@@ -18,7 +18,7 @@
         <img class="cloud12" src="{% static 'img/image 12.svg' %}" />
         <img class="cloud13" src="{% static 'img/image 13.svg' %}" />
         <div class="topBar">
-            <p id="title">www.</p>
+            <a href="{% url 'Main' %}"><p id="title">www.</p></a>
         </div>
         <div class="CreateBox">
             <form method="POST" action="{% url 'create' %}" , enctype="multipart/form-data">

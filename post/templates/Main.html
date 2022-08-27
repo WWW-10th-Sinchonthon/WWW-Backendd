@@ -21,7 +21,7 @@
 			<div class="headContainer">
 				<span class="logo"><a href="{% url 'Main' %}">www.</a></span>
                {% if user.is_authenticated %}
-                  {{user.nickname}}
+                  <span class="logo"><a href="{% url 'mypage' user.id %}">{{user.nickname}}</a></span>
                   <span class="logout"><a href="{% url 'logout' %}">LogOut</a></span>
                   <span class="create"><a href="{% url 'create' %}">글쓰기</a></span>
                {% else %}
@@ -191,7 +191,7 @@
                <div class="imgContainer">
                   {% for post in posts_scrap %}
 						<div class="imgEach">
-                        <img src="{{post.image.url}}" />
+                        <a href="{% url 'detail' post.id %}"><img src="{{post.image.url}}"/></a>
 							   <button class="cartBtn">🛒({{post.scrap}})</button>
 							   <button class="likeBtn">👍({{post.liked}})</button>
 							   <div class="tagContainer">
@@ -231,7 +231,7 @@
                <div class="imgContainer">
                   {% for post in origin_post %}
 						   <div class="imgEach">
-						   	<img src="{{post.image.url}}" />
+						   	<a href="{% url 'detail' post.id %}"><img src="{{post.image.url}}"/></a>
 							   <button class="cartBtn">🛒({{post.scrap}})</button>
 							   <button class="likeBtn">👍({{post.liked}})</button>
 							   <div class="tagContainer">
@@ -263,7 +263,7 @@
                <div class="imgContainer">
 						{% for post in posts_liked %}
 						   <div class="imgEach">
-						   	<img src="{{post.image.url}}" />
+						   	<a href="{% url 'detail' post.id %}"><img src="{{post.image.url}}"/></a>
 							   <button class="cartBtn">🛒({{post.scrap}})</button>
 							   <button class="likeBtn">👍({{post.liked}})</button>
 							   <div class="tagContainer">
