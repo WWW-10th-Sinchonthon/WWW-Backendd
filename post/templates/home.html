@@ -7,7 +7,14 @@
     <title>home</title>
 </head>
 <body>
-    home
-    <a href="{% url 'create' %}">create</a>
+    <div>
+        {% if user.is_authenticated %}
+        <button><a href="{% url 'create' %}">글쓰기</a></button>
+        {{user.nickname}}
+        {% else %}
+        <button><a href="{% url 'login' %}">Login</a></button>
+        {% endif %}
+    </div>
+    
 </body>
 </html>
