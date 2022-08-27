@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WWW</title>
+    <link rel="stylesheet" href="{% static 'css/mypage.css'%}">
+
+</head>
+
+<body>
+    <header>
+        <img class="cloud10" src="{% static 'img/image 10.svg' %}" />
+        <img class="cloud11" src="{% static 'img/image 11.svg' %}" />
+        <img class="cloud12" src="{% static 'img/image 12.svg' %}" />
+        <img class="cloud13" src="{% static 'img/image 13.svg' %}" />
+        <div class="logo">
+            <p>www</p>
+        </div>
+        <div class="profile">
+            <img class="profileImg" src="http://placekitten.com/g/200/300" alt="profile" />
+            <span class="nickname">닉네임</span>
+            <div class="desc">
+                <p>나에 대한 간략한 설명 글.</p>
+            </div>
+        </div>
+        <div class="btnContainer">
+            <button class="myPostBtn">게시글</button>
+            <button class="myStoreBtn">서랍장</button>
+        </div>
+    </header>
+    <main>
+        <div class="monthContainer">
+            <div class="month">2022년 8월</div>
+            <div class="monthWeather">
+                <img src="{% static 'img/image 14.svg'%}">
+                <img src="{% static 'img/image 15.svg'%}">
+                <div class="monthTitle">8월의 날씨 ⛅️</div>
+                <div class="monthDesc">
+                    <p>☀ 날씨 : <span>맑음</span></p>
+                    <p>🌡 기온 : <span>약 30도</span></p>
+                    <p>👋 초미세먼지 : <span>좋음</span></p>
+                    <p>🧥 이달에 자주 입었던 옷 : <span class="tag">#반팔 #반바지 #슬렉스 #얇은 겉옷</span></p>
+                </div>
+            </div>
+            <div class="imgContainer">
+                <img src="http://placekitten.com/g/300/400" />
+                <img src="http://placekitten.com/g/300/400" />
+                <img src="http://placekitten.com/g/300/400" />
+                <img src="http://placekitten.com/g/300/400" />
+                <img src="http://placekitten.com/g/300/400" />
+                <img src="http://placekitten.com/g/300/400" />
+            </div>
+            <div style="width:390px; height:80px"></div>
+        </div>
+    </main>
+</body>
+
+</html>
