@@ -6,6 +6,8 @@ import datetime
 
 def Main(request):
     origin_post=Post.objects.all()
+    posts_scrap = origin_post.order_by('-scrap')
+    posts_liked = origin_post.order_by('-liked')
     startdate = date.today()
     enddate = startdate + timedelta(days=1)
     post = Post.objects.filter(created_at__range=[startdate, enddate])
@@ -13,7 +15,7 @@ def Main(request):
     now = datetime.datetime.now()
     current_time = now.strftime("%H:%M")
     hour = int(now.strftime("%H"))
-    return render(request, 'Main.html', {"mypost":mypost, 'now':current_time, 'hour':hour, 'origin_post':origin_post})
+    return render(request, 'Main.html', {"mypost":mypost, 'now':current_time, 'hour':hour, 'posts_scrap':posts_scrap, 'posts_liked':posts_liked, 'origin_post':origin_post})
 
 def create(request):
     if request.method == 'GET':
