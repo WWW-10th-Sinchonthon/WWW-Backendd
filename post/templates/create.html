@@ -1,3 +1,4 @@
+#create.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +8,55 @@
     <title>create</title>
 </head>
 <body>
-    create
-    {{form}}
+    <form method = "POST" action = "http://127.0.0.1:8000/createform/">
+        {%csrf_token%}
+        <div>
+            사진 업로드<br/>
+            <input type="file" value = "image" name="image">
+        </div>
+        <div>
+            현재 날씨<br/>
+            오늘의 날씨: 
+            <input type="radio" name="weather" value="clear">#맑음
+            <input type="radio" name="weather" value="cloudy">#흐림
+            <input type="radio" name="weather" value="rainy">#비
+            <input type="radio" name="weather" value="snowy">#눈
+            <input type="radio" name="weather" value="windy">#바람
+            <br/>
+            <input type="text" name="weather_desc" placeholder="오늘의 날씨를 서술해주세요. 자세히 서술해 줄수록 도움 받는 사람들이 많아요 :-)">
+            <br/>
+            오늘의 기온:
+            <input type="text" name="temp" placeholder="정확한 기온 숫자만 적어주세요 ~ !"> 
+            <input type="text" name="temp_desc" placeholder="오늘의 기온을 서술해주세요. 자세히 서술해 줄수록 도움 받는 사람들이 많아요 :-)">
+            <br/>
+            초미세먼지:
+            <input type="radio" name="finedust" value="best">#좋음
+            <input type="radio" name="finedust" value="good">#조금좋음
+            <input type="radio" name="finedust" value="average">#보통
+            <input type="radio" name="finedust" value="bad">#조금나쁨
+            <input type="radio" name="finedust" value="worst">#나쁨
+            <br/>
+            <input type="text" name="finedust_desc" placeholder="오늘의 초미세먼지 농도에 대해 서술해주세요. 자세히 서술해 줄수록 도움 받는 사람들이 많아요 :-)">
+        </div>
+        <div>
+            글쓰기<br/>
+            오늘의 tmi:
+            <input type="text" name="tmi" placeholder="오늘의 날씨에 따른 기록을 해보세요. 짧아도 좋아요.">
+        </div>
+        <div>
+            태그<br/>
+            옷 태그: 
+            <input type="text" name="wear_tag1" placeholder="ex) 얇은 슬랙스">
+            <input type="text" name="wear_tag2">
+            <input type="text" name="wear_tag3">
+            <br/>
+            기록 태그: 
+            <input type="text" name="today_tag1" placeholder="ex)한강">
+            <input type="text" name="today_tag2">
+            <input type="text" name="today_tag3">
+        </div>
+        <input type="submit" value="post">
+    </form>
+    
 </body>
 </html>
