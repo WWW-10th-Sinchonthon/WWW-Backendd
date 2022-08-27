@@ -5,6 +5,7 @@ from django.conf import settings
 class Post(models.Model):
     image=models.ImageField(upload_to='media', null=True, blank=True)
     user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
     WEATHER_CHOICES = (
         ('0', '#맑음'),
         ('1', '#흐림'),

@@ -25,6 +25,7 @@ def createform(request):
         post.today_tag1 =request.POST['today_tag1']
         post.today_tag2 =request.POST['today_tag2']
         post.today_tag3 =request.POST['today_tag3']
+        post.user = request.user
         post.save()
     return redirect('home')
 
@@ -32,3 +33,7 @@ def createform(request):
 def detail(request, post_id):
     post_detail = get_object_or_404(Post, pk=post_id)
     return render(request, 'detail.html', {'post_detail':post_detail})
+
+
+def scrapview(request):
+    pass
