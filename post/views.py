@@ -3,7 +3,7 @@ from .models import User, Post, Scrap
 from .forms import CreateForm
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'Main.html')
 
 def create(request):
     if(request.method == 'POST' or request.method == 'FILES'):
