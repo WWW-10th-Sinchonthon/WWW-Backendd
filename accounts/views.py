@@ -41,11 +41,11 @@ def home(request):
 
 def edit(request):
     if request.method == 'POST':
-        user = Users()
+        user = request.user
         user.nickname = request.POST['nickname']
         user.user_image = request.POST['image']
         user.introduction = request.POST['introduction']
         user.save()
 
-        return render(request, 'edit.html')
+        return redirect('home')
     return render(request, 'edit.html')
