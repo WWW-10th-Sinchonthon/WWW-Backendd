@@ -9,24 +9,57 @@
 </head>
 <body>
     <a href="{% url 'create' %}">create</a>
-    <a href="{% url 'mypage' post_detail.id %}">{{post_detail.user.nickname}}</a>
-    {{post_detail.user.user_image}}
+    <a href="{% url 'mypage' post_detail.user_id %}">{{post_detail.user.nickname}}</a>
+    
+    {% if post_detail.user.user_image %}
+        <img src="{{ post_detail.user.user_image.url }}">
+    {% endif %}
+
     {{post_detail.user.nickname}}
     {{post_detail.image}}
     {{post_detail.wear_tag1}}
-    {{post_detail.wear_tag2}}
-    {{post_detail.wear_tag3}}
+
+    {% if post_detail.wear_tag2 %}
+        {{post_detail.wear_tag2}}
+    {% endif %}
+
+    {% if post_detail.wear_tag3 %}
+        {{post_detail.wear_tag3}}
+    {% endif %}
+
     {{post_detail.today_tag1}}
-    {{post_detail.today_tag2}}
-    {{post_detail.today_tag3}}
+
+    {% if post_detail.today_tag2 %}
+        {{post_detail.today_tag2}}
+    {% endif %}
+
+    {% if post_detail.today_tag3 %}
+        {{post_detail.today_tag3}}
+    {% endif %}
+
     {{post_detail.liked}}
     {{post_detail.scrap}}
     {{post_detail.weather}}
-    {{post_detail.weather_desc}}
+
+    {% if post_detail.weather_desc %}
+        {{post_detail.weather_desc}}
+    {% endif %}
+
     {{post_detail.temp}}
-    {{post_detail.temp_desc}}
+
+    {% if post_detail.temp_desc %}
+        {{post_detail.temp_desc}}
+    {% endif %}
+
     {{post_detail.finedust}}
-    {{post_detail.finedust_desc}}
-    {{post_detail.tmi}}
+
+    {% if post_detail.finedust_desc %}
+        {{post_detail.finedust_desc}}
+    {% endif %}
+
+    {% if post_detail.tmi %}
+        {{post_detail.tmi}}
+    {% endif %}
+    
 </body>
 </html>
