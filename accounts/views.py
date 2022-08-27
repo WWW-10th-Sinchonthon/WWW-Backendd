@@ -30,7 +30,7 @@ def signup(request):
             # 로그인
             auth.login(request, new_user)
             # 홈 리다이렉션
-            return redirect('Main')
+            return redirect('edit')
 
     if request.method == "GET":
         return render(request, 'signup.html')
@@ -44,9 +44,9 @@ def edit(request):
     if request.method == 'POST':
         user = request.user
         user.nickname = request.POST['nickname']
-        user.user_image = request.POST['image']
+        user.user_image = request.POST.get('image')
         user.introduction = request.POST['introduction']
         user.save()
 
-        return redirect('home')
-    return render(request, 'edit.html')
+        return redirect('Main')
+    return render(request, 'Profile.html')
