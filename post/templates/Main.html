@@ -19,11 +19,24 @@
 			<img class="cloud11" src="{% static 'img/image 10.svg' %}" />
 			<img class="cloud8" src="{% static 'img/image 10.svg' %}" />
 			<div class="headContainer">
-				<span class="logo">www</span>
-				<span class="login"><a href="{% url 'login' %}">login</a></span>
+				<span class="logo"><a href="{% url 'Main' %}">www.</a></span>
+               {% if user.is_authenticated %}
+                  {{ origin_post.user.nickname }}
+                  <span class="logout"><a href="{% url 'logout' %}">LogOut</a></span>
+                  <span class="create"><a href="{% url 'create' %}">글쓰기</a></span>
+               {% else %}
+                  <span class="login"><a href="{% url 'login' %}">Login</a></span>
+                  <span class="signup"><a href="{% url 'signup' %}">SignUp</a></span>
+               {% endif %}
 			</div>
 			<div class="time">
-				<p>Good morning</p>
+            {% if hour < 12 %}
+				   <p>Good Morning</p>
+            {% elif hour < 18 %}
+               <p>Good Afternoon</p>
+            {% else %}
+            <p>Good Night</p>
+            {% endif %}
 			</div>
 			<div class="weather">
 				<p>{{now}}</p>

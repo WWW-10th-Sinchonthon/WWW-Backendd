@@ -11,7 +11,7 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            return redirect('home')
+            return redirect('Main')
         else: 
             return render(request, 'bad_login.html')
     else:
@@ -19,7 +19,8 @@ def login(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect('home')
+    return redirect('Main')
+
 
 def signup(request):
     if request.method == "POST":
@@ -29,7 +30,7 @@ def signup(request):
             # 로그인
             auth.login(request, new_user)
             # 홈 리다이렉션
-            return redirect('home')
+            return redirect('Main')
 
     if request.method == "GET":
         return render(request, 'signup.html')
