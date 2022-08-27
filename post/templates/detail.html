@@ -1,65 +1,91 @@
 
-<!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>detail</title>
+    <title>WWW.</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="{% static 'css/Detail.css' %}" rel="stylesheet" />
 </head>
+
 <body>
-    <a href="{% url 'create' %}">create</a>
-    <a href="{% url 'mypage' post_detail.user_id %}">{{post_detail.user.nickname}}</a>
-    
-    {% if post_detail.user.user_image %}
-        <img src="{{ post_detail.user.user_image.url }}">
-    {% endif %}
-
-    {{post_detail.user.nickname}}
-    {{post_detail.image}}
-    {{post_detail.wear_tag1}}
-
-    {% if post_detail.wear_tag2 %}
-        {{post_detail.wear_tag2}}
-    {% endif %}
-
-    {% if post_detail.wear_tag3 %}
-        {{post_detail.wear_tag3}}
-    {% endif %}
-
-    {{post_detail.today_tag1}}
-
-    {% if post_detail.today_tag2 %}
-        {{post_detail.today_tag2}}
-    {% endif %}
-
-    {% if post_detail.today_tag3 %}
-        {{post_detail.today_tag3}}
-    {% endif %}
-
-    {{post_detail.liked}}
-    {{post_detail.scrap}}
-    {{post_detail.weather}}
-
-    {% if post_detail.weather_desc %}
-        {{post_detail.weather_desc}}
-    {% endif %}
-
-    {{post_detail.temp}}
-
-    {% if post_detail.temp_desc %}
-        {{post_detail.temp_desc}}
-    {% endif %}
-
-    {{post_detail.finedust}}
-
-    {% if post_detail.finedust_desc %}
-        {{post_detail.finedust_desc}}
-    {% endif %}
-
-    {% if post_detail.tmi %}
-        {{post_detail.tmi}}
-    {% endif %}
-    
+    <div class="view">
+        <div class="topBar">
+            <p id="title">WWW.</p>
+            <div class="right">
+                <p id="write" onclick="location.href='../Html/CreatePage.html'">
+                    글쓰기
+                </p>
+                <p id="name">닉네임</p>
+            </div>
+        </div>
+        <button class="backBtn">
+            <img src="{% static 'img/backbtn.svg' %}" alt="backbtn" />
+        </button>
+        <div class="profileBox">
+            <img src="{% static 'img/profileicon.svg' %}" alt="profileicon" />
+            <p id="profileName">닉네임</p>
+        </div>
+        <div class="detailImg"><img src="{% static 'img/detailshot.svg' %}" alt="" /></div>
+        <div class="tagBox">
+            <p id="commentTag">#사복</p>
+            <p id="commentTag">#한강</p>
+            <p id="commentTag">#개강전</p>
+            <p id="clothesTypeTag">#얇은긴팔</p>
+            <p id="clothesTypeTag">#A라인청치마</p>
+        </div>
+        <div class="nowWeatherBox">
+            <div class="Title">현재 날씨 ⛅</div>
+            <div class="contentBox">
+                <p class="ContentTitle">오늘의 날씨: 맑음 🌞</p>
+                <p class="ContentExplain">
+                    오랜만에 볕 따스하고, 구름 많습니다~! 가을이 오려나봐요! 아직 밤마다
+                    비가 살짝 오니 우산 챙겨가세요~!
+                </p>
+                <p class="ContentTitle">오늘의 기온 : 약 23도 🌡</p>
+                <p class="ContentExplain">
+                    처서가 지난 다음날이라 그런지 여름 날씨에서 가을 날씨로 이동하는
+                    듯한 계절이에요. 아직 여름 볕이 남아 있으니 썬크림은 필수지만,
+                    간간히 바람이 불어와서 추위 많이 타시는 분들은 얇은 겉옷 필수 입니당
+                </p>
+                <p class="ContentTitle">초미세먼지 : 좋음 😁</p>
+                <p class="ContentExplain">
+                    코로나만 아니었으면 마스크 집어 던지고 싶은 날~!
+                </p>
+            </div>
+            <button class="releteBtn" onclick="releteIncrease()">
+                날씨 공감 👍
+            </button>
+        </div>
+        <div class="tmiBox">
+            <div class="Title">오늘의 tmi 🍀</div>
+            <div class="contentBox2">
+                <div class="ContentTitle">오늘의 기분 : 좋음 😊</div>
+                <div class="ContentExplain">
+                    오늘은 개강전 친구랑 ~~~ 그냥 몇줄 tmi 남기는 곳! 기록장!느낌 오늘은
+                    개강전 친구랑 ~~~ 그냥 몇줄 tmi 남기는 곳! 기록장!느낌 오늘은 개강전
+                    친구랑 ~~~ 그냥 몇줄 tmi 남기는 곳! 기록장!느낌
+                </div>
+            </div>
+            <button class="scrapBtn" onclick="scrapIncrease()">
+                스크랩 하기 🛒
+            </button>
+        </div>
+    </div>
 </body>
+
 </html>
+
+<script>
+    var releteCount = 0;
+    function releteIncrease() {
+        releteCount = releteCount + 1;
+        document.querySelector('.releteBtn').innerText =
+            '날씨 공감 👍' + ' ' + '(' + releteCount + ')';
+    }
+
+    var scrapCount = 0;
+    function scrapIncrease() {
+        scrapCount = scrapCount + 1;
+        document.querySelector('.scrapBtn').innerText =
+            '스크랩 하기 🛒' + ' ' + '(' + scrapCount + ')';
+    }
+</script>
