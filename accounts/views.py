@@ -38,3 +38,14 @@ def signup(request):
 
 def home(request):
     return render(request, 'home.html')
+
+def edit(request):
+    if request.method == 'POST':
+        user = Users()
+        user.nickname = request.POST['nickname']
+        user.user_image = request.POST['image']
+        user.introduction = request.POST['introduction']
+        user.save()
+
+        return render(request, 'edit.html')
+    return render(request, 'edit.html')
