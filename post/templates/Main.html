@@ -22,7 +22,7 @@
       <img class="cloud8" src="{% static 'img/image 8.svg' %}" />
       <div class="headContainer">
          <span class="logo">www</span>
-         <span class="login">login</span>
+         <span class="login"><a href="{% url 'login' %}">login</a></span>
       </div>
       <div class="time">
          <p>Good morning</p>
@@ -33,19 +33,18 @@
       <div class="nowWeather">
          <p class="title">현재 날씨 ⛅️</p>
          <div>
-            <p>오늘의 날씨 : 맑음 🌞</p>
-            <p>오랜만에 볕 따스하고, 구름 많습니다~! 가을이 오려나봐요! 아직 밤마다 비가 살짝 오니 우산 챙겨가세요~!</p>
+            <p>오늘의 날씨 : {{mypost.weather}}</p>
+            <p>{{mypost.weather_desc}}</p>
          </div>
          <div>
-            <p>오늘의 기온 : 약 23도 🌡</p>
-            <p>처서가 지난 다음날이라 그런지 여름 날씨에서 가을 날씨로 이동하는 듯한 계절이에요. 아직 여름 볕이 남아 있으니 썬크림은 필수지만, 간간히 바람이 불어와서 추위 많이 타시는 분들은 얇은
-               겉옷 필수 입니당</p>
+            <p>오늘의 기온 : 약 {{mypost.temp}} 🌡</p>
+            <p>{{mypost.temp_desc}}</p>
          </div>
          <div>
-            <p>초미세먼지 : 좋음 😁</p>
-            <p>코로나만 아니었으면 마스크 집어 던지고 싶은 날~!</p>
+            <p>초미세먼지 : {{mypost.finedust}} </p>
+            <p>{{mypost.finedust_desc}}</p>
          </div>
-         <p class="caster">기상 캐스터 : 잉용용</p>
+         <p class="caster">기상 캐스터 : {{mypost.user.nickname}}</p>
       </div>
    </header>
    <main>

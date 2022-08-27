@@ -16,7 +16,7 @@ def create(request):
         post.weather_desc = request.POST['weather_desc']
         post.temp = request.POST['temp']
         post.temp_desc = request.POST['temp_desc']
-        post.finedust =request.POST['finedust']
+        post.finedust =request.POST.get('finedust')
         post.finedust_desc =request.POST['finedust_desc']
         post.tmi =request.POST['tmi']
         post.wear_tag1 =request.POST['wear_tag1']
@@ -40,16 +40,10 @@ def Main(request):
     enddate = startdate + timedelta(days=1)
 
     post = Post.objects.filter(created_at__range=[startdate, enddate])
+    mypost = post.order_by('-liked')[0]
+    print(mypost.weather)
 
-    post.order_by('-liked')[0]
-
-
-    print(str(post.liked))
-    # for posts in Post.objects.filter(created_at__range=[startdate, enddate]):
-    #     temp = posts
-    #     print(str(posts.liked))
-
-    return render(request, 'Main.html')
+    return render(request, 'Main.html', {"mypost":mypost})
     
 
 def mypage(request,user_id):
