@@ -21,6 +21,7 @@
 			<div class="headContainer">
 				<span class="logo"><a href="{% url 'Main' %}">www.</a></span>
                {% if user.is_authenticated %}
+                  {{user.nickname}}
                   <span class="logout"><a href="{% url 'logout' %}">LogOut</a></span>
                   <span class="create"><a href="{% url 'create' %}">글쓰기</a></span>
                {% else %}
@@ -76,7 +77,7 @@
 					<div class="imgContainer">
                   {% for post in posts_scrap %}
 						<div class="imgEach">
-							   <img src="http://placekitten.com/g/300/300" />
+							   <img src="{{post.image.url}}" />
 							   <button class="cartBtn">🛒({{post.scrap}})</button>
 							   <button class="likeBtn">👍({{post.liked}})</button>
 							   <div class="tagContainer"><span>{{post.wear_tag1}}</span><span>#한강 </span><span>#개강전 </span></div>
@@ -190,7 +191,7 @@
                <div class="imgContainer">
                   {% for post in posts_scrap %}
 						<div class="imgEach">
-                        <img src="http://placekitten.com/g/300/300" />
+                        <img src="{{post.image.url}}" />
 							   <button class="cartBtn">🛒({{post.scrap}})</button>
 							   <button class="likeBtn">👍({{post.liked}})</button>
 							   <div class="tagContainer">
@@ -230,7 +231,7 @@
                <div class="imgContainer">
                   {% for post in origin_post %}
 						   <div class="imgEach">
-						   	<img src="http://placekitten.com/g/300/300" />
+						   	<img src="{{post.image.url}}" />
 							   <button class="cartBtn">🛒({{post.scrap}})</button>
 							   <button class="likeBtn">👍({{post.liked}})</button>
 							   <div class="tagContainer">
@@ -262,7 +263,7 @@
                <div class="imgContainer">
 						{% for post in posts_liked %}
 						   <div class="imgEach">
-						   	<img src="http://placekitten.com/g/300/300" />
+						   	<img src="{{post.image.url}}" />
 							   <button class="cartBtn">🛒({{post.scrap}})</button>
 							   <button class="likeBtn">👍({{post.liked}})</button>
 							   <div class="tagContainer">
