@@ -6,7 +6,7 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>WWW</title>
+   <title>www.</title>
    <link rel="stylesheet" href="{% static 'css/Main.css' %}">
 
 </head>
@@ -20,9 +20,16 @@
       <img class="cloud105" src="{% static 'img/image 10.svg' %}" />
       <img class="cloud11" src="{% static 'img/image 11-1.svg' %}" />
       <img class="cloud8" src="{% static 'img/image 8.svg' %}" />
+      
       <div class="headContainer">
-         <span class="logo">www</span>
-         <span class="login"><a href="{% url 'login' %}">login</a></span>
+         <span class="logo">www.</span>
+         {% if user.is_authenticated %}
+         {{ origin_post.users.nickname }}
+         <span class="create"><a href="{% url 'create' %}">글쓰기</a></span>
+         {% else %}
+         <span class="login"><a href="{% url 'login' %}">Login</a></span>
+         <span class="signup"><a href="{% url 'signup' %}">SignUp</a></span>
+         {% endif %}
       </div>
       <div class="time">
          <p>Good morning</p>
